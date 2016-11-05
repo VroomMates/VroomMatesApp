@@ -1,3 +1,11 @@
+ var config = {
+		apiKey: "AIzaSyB3ocXC1s5sSMOT2ZV0snKdjBx85XsbPmA",
+		authDomain: "college-4ab84.firebaseapp.com",
+		databaseURL: "https://college-4ab84.firebaseio.com",
+		storageBucket: "college-4ab84.appspot.com",
+		messagingSenderId: "409094544332"
+	  };
+	  firebase.initializeApp(config);
   /**
      * Handles the sign in button press.
      */
@@ -128,7 +136,9 @@
           // [START_EXCLUDE silent]
           document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
           document.getElementById('quickstart-sign-in').textContent = 'Sign out';
-          //document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+          document.getElementById('quickstart-account-details').textContent = firebase.auth().currentUser.uid;
+		  regNewUser(email,uid);
+		  
           if (!emailVerified) {
             document.getElementById('quickstart-verify-email').disabled = false;
           }
@@ -157,8 +167,17 @@
             }
 			
 	function Redirect_login() {
-               window.location="login.html";
+               window.location="index.html";
             }	
+			
+	function Redirect_Save() {
+               window.location="savedata.html";
+            }	
+	function regNewUser(newemail,uid){
+		firebase.database().ref('Users/'+ uid).set({
+		email: newemail
+	});			
+	}
 	
     window.onload = function() {
       initApp();
