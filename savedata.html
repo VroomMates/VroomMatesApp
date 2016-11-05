@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  </head>
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <script src="Functions.js"></script>
+	<div class="quickstart-user-details-container">
+            Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
+            <div><code></code></div>
+            <pre><code id="quickstart-account-details"></code></pre>
+          </div>
+	</div>
+  
+  <body>
+    <img id="gravatar" />
+    <h2>Firebase Example</h2>
+    <input type='text' id='name'  placeholder='Enter your data here...'>
+	<input type='text' id='county'  placeholder='Enter your county here...'>
+	<input type='text' id='town'  placeholder='Enter your town here...'>
+    <button type="button" onclick="savedata()">Save Data</button>
+    <br><br><br>
+    <hr>
+    <h2>Results</h2>
+    <textarea rows="10" cols="50" id="results"></textarea>
+    <script>
+    var messagesRef = new Firebase('https://college-4ab84.firebaseio.com');
+    var userId = 0;
+    // For user authentication
+    /*function authHandler(error, authData) {
+      if (error) {
+        console.log('Login Failed!', error);
+      } else {
+        // Set the gravatar
+        document.getElementById('gravatar').src = authData.password.profileImageURL;
+      }
+    }
+    // Log the user in with an email combination
+    messagesRef.authWithPassword({
+      email    : 'test1@test.com',
+      password : 'qwerty'
+    }, authHandler);
+    
+    messagesRef.onAuth(function(authData) {
+       userId = authData.uid;
+    });*/
+	var name = document.getElementById('name');
+	var town = document.getElementById('town');
+	var county = document.getElementById('county');
+    var messageResults = document.getElementById('results');
+    // Save data to firebase
+    function savedata(){
+      var n = name.value;
+	  var t = town.value;
+	  var c = county.value;
+      messagesRef.child('users').child(userId).push({fieldName:'n', text:name});
+	  //messagesRef.child('users').child(userId).push({fieldName:'c', text:county});
+	  //messagesRef.child('users').child(userId).push({fieldName:'t', text:town});
+      n.value = '';
+	  c.value = '';
+	  t.value = '';
+    }
+    // Update results when data is added
+    messagesRef.child('users').child(userId).limitToLast(10).on('child_added', function (snapshot) {
+        var data = snapshot.val();
+        console.log(snapshot.val());
+        var message = data.text;
+        if (message != undefined)
+        {
+          messageResults.value += '\n' + message;
+        }
+    });
+    </script>
+	
+</html>

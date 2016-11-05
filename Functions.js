@@ -1,4 +1,4 @@
- var config = {
+    var config = {
 		apiKey: "AIzaSyB3ocXC1s5sSMOT2ZV0snKdjBx85XsbPmA",
 		authDomain: "college-4ab84.firebaseapp.com",
 		databaseURL: "https://college-4ab84.firebaseio.com",
@@ -75,6 +75,10 @@
         // [END_EXCLUDE]
       });
       // [END createwithemail]
+	  
+	  var user = firebase.auth().currentUser;
+	  regNewUser(email,user.uid);
+	  
     }
     /**
      * Sends an email verification to the user.
@@ -137,7 +141,8 @@
           document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
           document.getElementById('quickstart-sign-in').textContent = 'Sign out';
           document.getElementById('quickstart-account-details').textContent = firebase.auth().currentUser.uid;
-		  regNewUser(email,uid);
+		  checkIfUserExists(uid);
+		  //regNewUser(email,uid);
 		  
           if (!emailVerified) {
             document.getElementById('quickstart-verify-email').disabled = false;
@@ -157,7 +162,7 @@
       });
       // [END authstatelistener]
       document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
-      document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
+      //document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
       document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
       document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
     }
@@ -170,13 +175,37 @@
                window.location="index.html";
             }	
 			
-	function Redirect_Save() {
-               window.location="savedata.html";
+	function Redirect_home() {
+               window.location="home.html";
             }	
+	
+	
+	
 	function regNewUser(newemail,uid){
+		
 		firebase.database().ref('Users/'+ uid).set({
 		email: newemail
-	});			
+		});			
+	}
+	
+	var USERS_LOCATION = 'https://college-4ab84.firebaseio.com/Users';
+
+	function userExistsCallback(uid, exists) {
+	  if (exists) {
+		alert('user ' + uid + ' exists!');
+	  } else {
+		alert('user ' + uid + ' does not exist!');
+	  }
+	}
+
+	// Tests to see if /users/<userId> has any data. 
+	function checkIfUserExists(uid) {
+	  //var usersRef = new firebase(USERS_LOCATION);
+	  var usersRef = new firebase.database().ref('Users/');
+	  usersRef.child(uid).once('value', function(snapshot) {
+		var exists = (snapshot.val() !== null);
+		userExistsCallback(uid, exists);
+	  });
 	}
 	
     window.onload = function() {
