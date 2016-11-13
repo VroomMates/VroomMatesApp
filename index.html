@@ -21,9 +21,6 @@
     <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css">
 
-
-	<script type="text/javascript" src="firebase_project_info.js"></script>
-	
     <script type="text/javascript" src="Functions.js"></script>
 
   </head>
@@ -45,29 +42,22 @@
           
           <input class="mdl-textfield__input" style="display:inline;width:auto;" type="password" id="password" name="password" placeholder="Password"/>
           <br/><br/>
-          <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">Sign In</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised" onclick="handleSignIn()" name="signin">Sign In</button>
           
 		
 			<!-- When sign up is pressed redirects to sign up page -->
-          <!--<button class="mdl-button mdl-js-button mdl-button--raised" onclick ="Redirect_sign_up();" name="signup">Sign Up</button>-->
-          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-up" name="signup">Sign Up</button>
-        
-		  <button class="mdl-button mdl-js-button mdl-button--raised" disabled id="quickstart-verify-email" name="verify-email">Send Email Verification</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised" onclick ="Redirect_sign_up();" name="signup">Sign Up</button>
           
-          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">Send Password Reset Email</button>
-			
-		
-          <!-- Container where we'll display the user details -->
-          <div class="quickstart-user-details-container">
-            Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
-            <div><code></code></div>
-            <pre><code id="quickstart-account-details"></code></pre>
-          </div>
+          <button class="mdl-button mdl-js-button mdl-button--raised" onclick="sendPasswordReset()" name="password-email">Forgot Password</button>
+		 
         </div>
       </div>
 
     </div>
   </main>
 </div>
+
+<br>
+ <iframe id="map" width="500" height="400" frameborder="0" style="border:0" src="testing.html"></iframe>
 </body>
 </html>
