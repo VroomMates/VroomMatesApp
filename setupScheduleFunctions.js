@@ -59,5 +59,6 @@ function writeUserData(userId, morn, even, day) {
   reference.child('morningSchedule/'+day).set(morn);
   reference.child('eveningSchedule/'+day).set(even);
 }
-
+function Redirect_setupLocation(){
+		window.location="setupLocation.html";
 }

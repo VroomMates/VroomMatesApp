@@ -30,8 +30,19 @@
       // [END createwithemail]
     }
     
+	firebase.auth().onAuthStateChanged(function(user) {
+			//if user now logged in
+			if(user){
+				//call database creation function
+				regNewUser(user.email,user.uid);
+				sendEmailVerification();
+				Redirect_setup();
+			}
+			//is database created
+			
+		});
 	//handles creating user database upon signup
-    function initApp() {
+    /*function initApp() {
 		firebase.auth().onAuthStateChanged(function(user) {
 			//if user now logged in
 			if(user){
@@ -51,10 +62,10 @@
 			}
 			if(created){
 				//if created sign up finished, redirect to home
-				Redirect_home();
+				Redirect_setup();
 			}
 		});
-	}
+	}*/
 	
 	function sendEmailVerification() {
       // [START sendemailverification]
@@ -71,12 +82,16 @@
                window.location="index.html";
             }	
 			
-	function Redirect_home() {
-               window.location="home.html";
+	function Redirect_setup() {
+               window.location="setupInfo.html";
             }
-    window.onload = function() {
+			
+	function Redirect_home() {
+				window.location="home.html";
+			}	
+   /* window.onload = function() {
       initApp();
-    };
+    };*/
 	
 	//creates database for new users once they have signed up
 	function regNewUser(newemail,uid){
@@ -91,7 +106,6 @@
 			lng: 0,
 			lat: 0
 		});
-		
 		firebase.database().ref('Users/'+ uid + '/morningSchedule/').set({
 			monday: "",
 			tuesday: "",
@@ -106,7 +120,7 @@
 			thursday: "",
 			friday: ""
 		});
-		firebase.database().ref('Users/'+ uid + '/Matches/').set();
+		//firebase.database().ref('Users/'+ uid + '/Matches/').set();
 	}
 	
 	

@@ -7,10 +7,10 @@ var config = {
 	  };
 	  firebase.initializeApp(config);
 
-	  /*firebase.auth().onAuthStateChanged(function(user) {
+	  firebase.auth().onAuthStateChanged(function(user) {
 			alert(user.uid);
 			readUserData();
-	  });*/
+	  });
 	  
 function validateForm(){
 	var valid = false;
@@ -36,6 +36,11 @@ function writeUserData(userId, firstName, lastName, gender, driver) {
   reference.child('lastName').set(lastName);
   reference.child('gender').set(gender);
   reference.child('driver').set(driver);
+  Redirect_setupSchedule();
+}
+
+function Redirect_setupSchedule(){
+		window.location = "setupSchedule.html";
 }
 
 function readUserData(){
