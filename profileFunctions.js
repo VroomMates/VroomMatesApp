@@ -7,41 +7,15 @@ var config = {
 	  };
 	  firebase.initializeApp(config);
 
-	  /*firebase.auth().onAuthStateChanged(function(user) {
-			alert(user.uid);
-			readUserData();
-	  });*/
-	  
-function validateForm(){
-	var valid = false;
-	var firstName = document.getElementById('firstName').value;
-	var lastName = document.getElementById('lastName').value;
-	var gender = document.querySelector('input[name ="gender"]:checked').value;
-	var driver = document.querySelector('input[name ="driver"]:checked').value;
-	
-	if(firstName.length<=0||lastName.length<=0||gender==null||driver==null){
-		alert("Value empty");
-	}
-	else{
-		valid=true;
-		var userId = firebase.auth().currentUser.uid;
-		writeUserData(userId, firstName, lastName, gender, driver);
-	}
-	return valid;
-}
+	  firebase.auth().onAuthStateChanged(function(user) {
+			readUserData(user.uid);
+	  });
 
-function writeUserData(userId, firstName, lastName, gender, driver) {
-  var reference = firebase.database().ref('Users/'+userId);
-  reference.child('firstName').set(firstName);
-  reference.child('lastName').set(lastName);
-  reference.child('gender').set(gender);
-  reference.child('driver').set(driver);
-}
-
-function readUserData(){
-	var user = firebase.auth().currentUser.uid;
+function readUserData(user){
 	firebase.database().ref('Users/' + user).once('value').then(function(snapshot) {
-		document.getElementById('firstName').value = snapshot.val().firstName;
-		document.getElementById('lastName').value = snapshot.val().lastName;
+		document.getElementById('firstName').innerHTML = snapshot.val().firstName;
+		document.getElementById('lastName').innerHTML = snapshot.val().lastName;
+		document.getElementById('gender').innerHTML = snapshot.val().gender;
+		document.getElementById('driver').innerHTML = snapshot.val().driver;		
 	});
 }
