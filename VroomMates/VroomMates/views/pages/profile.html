@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css">
+	<script src="profileFunctions.js"></script>
+	
+			<h3>First Name:</h3>
+			<!--<div id="firstName"></div>-->
+			<input id="firstName" type="text" onClick="this.setSelectionRange(0, this.value.length)" value="">
+			<h3>Last Name:</h3>
+			<input id="lastName" type="text" onClick="this.setSelectionRange(0, this.value.length)" value="">
+			<h3>Gender:</h3>
+			<input id="genderMale" type="radio" name="gender" value="Male">
+			<input id="genderFemale" type="radio" name="gender" value="Female">
+			<input id="genderOther" type="radio" name="gender" value="Other">
+			<h3>Driver:</h3>
+			<input id="driveryes" type="radio" name="driver" value="yes">
+			<input id="driverno" type="radio" name="driver" value="no">
+			<h3>Address:</h3>
+			<input id="address" type="text" onClick="this.setSelectionRange(0, this.value.length)" value="">
+			<h3>Schedule:</h3>
+			<button onclick="redirect_Schedule()" id="schedule" disabled>Schedule</button>
+			<button onclick="redirect_Home()" id="home" disabled>Home</button>
+			
+			
+	</head>
+	<body>
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkr4cxrw3ZEG098emzdRIfpfNX5rDMg2k">
+    </script>
+	</body>
+</html>
