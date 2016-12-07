@@ -48,7 +48,6 @@ var config = {
 		lat:userLat,
 		lng:userLng
 	};
-	
 	var end = {//maynooth
 		lat:53.3813,
 		lng:-6.5918
@@ -64,11 +63,10 @@ var config = {
 	//above + left
 	if(you.lat>=end.lat&&you.lng<=end.lng){
 		var area = .2;
-		var stoplat = (poslat + 1);
-		var stoplng = (poslng - 2);
-		//alert(stoplat + " | " + stoplng);
-		var ratiolat = (you.lat - end.lat)/100;
-		var ratiolng = (you.lng - end.lng)/100;
+		var ratiolat = Math.abs(you.lat - end.lat)/100;
+		var ratiolng = Math.abs(you.lng - end.lng)/100;
+		var stoplat = (poslat + (ratiolat*300));
+		var stoplng = (poslng - (ratiolng*300));
 		while(poslat<=stoplat && poslng >= stoplng){
 			var lngdiff = Math.abs(str.lng - poslng);
 			var latdiff = Math.abs(str.lat - poslat);
@@ -87,7 +85,7 @@ var config = {
 			}
 			
 			if(poslng>stoplng){
-				poslng += ratiolng;
+				poslng -= ratiolng;
 			}
 			area += .1;
 			//alert(area);
@@ -96,11 +94,10 @@ var config = {
 	//above + right
 	if(you.lat>=end.lat&&you.lng>=end.lng){
 		var area = .2;
-		var stoplat = (poslat + 1);
-		var stoplng = (poslng + 2);
-		//alert(stoplat + " | " + stoplng);
-		var ratiolat = (you.lat - end.lat)/100;
-		var ratiolng = (you.lng - end.lng)/100;
+		var ratiolat = Math.abs(you.lat - end.lat)/100;
+		var ratiolng = Math.abs(you.lng - end.lng)/100;
+		var stoplat = (poslat + (ratiolat*300));
+		var stoplng = (poslng + (ratiolng*300));
 		while(poslat<=stoplat && poslng <= stoplng){
 			var lngdiff = Math.abs(str.lng - poslng);
 			var latdiff = Math.abs(str.lat - poslat);
@@ -115,8 +112,8 @@ var config = {
 				poslat += ratiolat;
 			}
 			
-			if(poslng>stoplng){
-				poslng -= ratiolng;
+			if(poslng<stoplng){
+				poslng += ratiolng;
 			}
 			area += .1;
 			//alert(area);
@@ -126,11 +123,10 @@ var config = {
 	//below + left
 	if(you.lat<=end.lat&&you.lng<=end.lng){
 		var area = .2;
-		var stoplat = (poslat - 1);
-		var stoplng = (poslng - 2);
-		//alert(stoplat + " | " + stoplng);
-		var ratiolat = (you.lat - end.lat)/100;
-		var ratiolng = (you.lng - end.lng)/100;
+		var ratiolat = Math.abs(you.lat - end.lat)/100;
+		var ratiolng = Math.abs(you.lng - end.lng)/100;
+		var stoplat = (poslat - (ratiolat*300));
+		var stoplng = (poslng - (ratiolng*300));
 		while(poslat<=stoplat && poslng >= stoplng){
 			var lngdiff = Math.abs(str.lng - poslng);
 			var latdiff = Math.abs(str.lat - poslat);
@@ -148,7 +144,7 @@ var config = {
 			}
 			
 			if(poslng>stoplng){
-				poslng += ratiolng;
+				poslng -= ratiolng;
 			}
 			area += .1;
 			//alert(area);
@@ -159,11 +155,10 @@ var config = {
 	
 	if(you.lat<=end.lat&&you.lng>=end.lng){
 		var area = .2;
-		var stoplat = (poslat - 1);
-		var stoplng = (poslng + 2);
-		//alert(stoplat + " | " + stoplng);
-		var ratiolat = (you.lat - end.lat)/100;
-		var ratiolng = (you.lng - end.lng)/100;
+		var ratiolat = Math.abs(you.lat - end.lat)/100;
+		var ratiolng = Math.abs(you.lng - end.lng)/100;
+		var stoplat = (poslat - (ratiolat*400));
+		var stoplng = (poslng + (ratiolng*400));
 		while(poslat<=stoplat && poslng >= stoplng){
 			var lngdiff = Math.abs(str.lng - poslng);
 			var latdiff = Math.abs(str.lat - poslat);
@@ -181,7 +176,7 @@ var config = {
 			}
 			
 			if(poslng<stoplng){
-				poslng -= ratiolng;
+				poslng += ratiolng;
 			}
 			area += .1;
 			//alert(area);
@@ -190,8 +185,8 @@ var config = {
 	}
 	
 	function search(){
-		var mayLat = 53.3813;
-		var mayLng = -6.5918;
+		//var mayLat = 53.3813;
+		//var mayLng = -6.5918;
 		
 		
 		firebase.database().ref().once("child_added", function(snapshot) {
