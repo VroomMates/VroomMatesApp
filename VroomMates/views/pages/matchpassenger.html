@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+	<script>
+	
+	var stre = {//edgeworthstown
+		lat:53.7675,
+		lng:-7.4480
+	};
+	var str = {//rochfort
+		lat:53.4146,
+		lng:-7.2997
+	};
+	var you = {//kinnegad
+		lat:53.4568,
+		lng:-7.1050
+	};
+	
+	var end = {//maynooth
+		lat:53.3813,
+		lng:-6.5918
+	};
+	
+	/*var youa = {//athboy
+		lat:53.6236,
+		lng:-6.9156
+	};
+	
+	
+	
+	var strk = {//killucan
+		lat:53.5137,
+		lng:-7.1428
+	};
+	var str = {//clonmellon
+		lat:53.6641,
+		lng:7.0184
+	};
+	
+	var strc = {//callan
+		lat:52.5448,
+		lng:7.3920
+	};
+	
+	var youki = {//kilkenny
+		lat:52.65421,
+		lng:7.2448
+	};
+	
+	*/
+	
+	var poslat = you.lat;
+	var poslng = you.lng;
+	//if(str.lat<end.lat) //if below
+	//if(str.lat>end.lat) //if above
+	//if(str.lng>end.lng) //if left
+	//if(str.lng<end.lng) //if right
+	
+	//above + left
+	if(you.lat>=end.lat&&you.lng<=end.lng){
+		var area = .2;
+		var stoplat = (poslat + 1);
+		var stoplng = (poslng - 2);
+		alert(stoplat + " | " + stoplng);
+		var ratiolat = (you.lat - end.lat)/100;
+		var ratiolng = (you.lng - end.lng)/100;
+		while(poslat<=stoplat && poslng >= stoplng){
+			var lngdiff = Math.abs(str.lng - poslng);
+			var latdiff = Math.abs(str.lat - poslat);
+			//alert(lngdiff + " | " + latdiff);
+	
+			if( (lngdiff<area) && (latdiff<area)){
+				latdiff = Math.abs(str.lng - you.lng)*100;
+				lngdiff = Math.abs(str.lat - you.lat)*100;
+				//alert(latdiff + " | " + lngdiff);
+				alert("Match at " + Math.round((latdiff + lngdiff)*(4/5)) + "km");
+				break;
+			}
+			
+			if(poslat<stoplat){
+				poslat += ratiolat;
+			}
+			
+			if(poslng>stoplng){
+				poslng += ratiolng;
+			}
+			area += .1;
+			alert(area);
+		}
+	}
+	//above + right
+	if(you.lat>=end.lat&&you.lng>=end.lng){
+		var area = .2;
+		var stoplat = (poslat + 1);
+		var stoplng = (poslng + 2);
+		alert(stoplat + " | " + stoplng);
+		var ratiolat = (you.lat - end.lat)/100;
+		var ratiolng = (you.lng - end.lng)/100;
+		while(poslat<=stoplat && poslng <= stoplng){
+			var lngdiff = Math.abs(str.lng - poslng);
+			var latdiff = Math.abs(str.lat - poslat);
+			alert(lngdiff + " | " + latdiff);
+			if( (lngdiff<area) && (latdiff<area)){
+				latdiff = Math.abs(str.lng - you.lng)*100;
+				lngdiff = Math.abs(str.lat - you.lat)*100;
+				alert(latdiff + " | " + lngdiff);
+				alert("Match at " + Math.round((latdiff + lngdiff)*(4/5)) + "km");
+				break;
+			}
+			if(poslat<stoplat){
+				poslat += ratiolat;
+			}
+			
+			if(poslng>stoplng){
+				poslng -= ratiolng;
+			}
+			area += .1;
+			//alert(area);
+		}
+	}
+
+	//below + left
+	if(you.lat<=end.lat&&you.lng<=end.lng){
+		var area = .2;
+		var stoplat = (poslat - 1);
+		var stoplng = (poslng - 2);
+		alert(stoplat + " | " + stoplng);
+		var ratiolat = (you.lat - end.lat)/100;
+		var ratiolng = (you.lng - end.lng)/100;
+		while(poslat<=stoplat && poslng >= stoplng){
+			var lngdiff = Math.abs(str.lng - poslng);
+			var latdiff = Math.abs(str.lat - poslat);
+			alert(lngdiff + " | " + latdiff);
+		
+			if( (lngdiff<area) && (latdiff<area)){
+				latdiff = Math.abs(str.lng - you.lng)*100;
+				lngdiff = Math.abs(str.lat - you.lat)*100;
+				alert(latdiff + " | " + lngdiff);
+				alert("Match at " + Math.round((latdiff + lngdiff)*(4/5)) + "km");
+				break;
+			}
+			
+			if(poslat>stoplat){
+				poslat -= ratiolat;
+			}
+			
+			if(poslng>stoplng){
+				poslng += ratiolng;
+			}
+			area += .1;
+			//alert(area);
+		}
+	}
+	
+	//below + right 
+	
+	if(you.lat<=end.lat&&you.lng>=end.lng){
+		var area = .2;
+		var stoplat = (poslat - 1);
+		var stoplng = (poslng + 2);
+		alert(stoplat + " | " + stoplng);
+		var ratiolat = (you.lat - end.lat)/100;
+		var ratiolng = (you.lng - end.lng)/100;
+		while(poslat<=stoplat && poslng >= stoplng){
+			var lngdiff = Math.abs(str.lng - poslng);
+			var latdiff = Math.abs(str.lat - poslat);
+			alert(lngdiff + " | " + latdiff);
+			
+			if( (lngdiff<area) && (latdiff<area)){
+				latdiff = Math.abs(str.lng - you.lng)*100;
+				lngdiff = Math.abs(str.lat - you.lat)*100;
+				alert(latdiff + " | " + lngdiff);
+				alert("Match at " + Math.round((latdiff + lngdiff)*(4/5)) + "km");
+				break;
+			}
+			
+			if(poslat>stoplat){
+				poslat -= ratiolat;
+			}
+			
+			if(poslng<stoplng){
+				poslng -= ratiolng;
+			}
+			area += .1;
+			//alert(area);
+		}
+	}
+
+</script>
+
+</html>
